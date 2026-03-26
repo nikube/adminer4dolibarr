@@ -1,0 +1,22 @@
+{
+  "schema_version": "1",
+  "module_id": "adminer4dolibarr",
+  "name": "Adminer for Dolibarr",
+  "description": "Integrate Adminer database management tool directly into Dolibarr with automatic authentication.",
+  "author": "AnatoleConseil.com",
+  "url": "https://anatoleconseil.com/",
+  "license": "GPL-3.0",
+  "dolibarr_module_id": 185150,
+  "repository": "nikube/adminer4dolibarr",
+  "compatibility": {
+    "0.x": {
+      "dolibarr_min": "16.0.0",
+      "dolibarr_max": "23.*",
+      "php_min": "7.1"
+    }
+  },
+  "dependencies": {
+    "modules": [],
+    "php_extensions": []
+  }
+}

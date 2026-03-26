@@ -1,0 +1,34 @@
+# Apache configuration for Adminer4Dolibarr module
+# Increases PHP limits to handle Adminer's requirements
+
+<IfModule mod_php5.c>
+    php_value max_input_vars 10000
+    php_value post_max_size 128M
+    php_value upload_max_filesize 128M
+    php_value max_execution_time 300
+    php_value memory_limit 256M
+    php_value max_input_nesting_level 128
+</IfModule>
+
+<IfModule mod_php7.c>
+    php_value max_input_vars 10000
+    php_value post_max_size 128M
+    php_value upload_max_filesize 128M
+    php_value max_execution_time 300
+    php_value memory_limit 256M
+    php_value max_input_nesting_level 128
+</IfModule>
+
+<IfModule mod_php8.c>
+    php_value max_input_vars 10000
+    php_value post_max_size 128M
+    php_value upload_max_filesize 128M
+    php_value max_execution_time 300
+    php_value memory_limit 256M
+    php_value max_input_nesting_level 128
+</IfModule>
+
+# Security: Prevent direct access to sensitive files
+<FilesMatch "\.(ini|conf|sql|bak|old)$">
+    Require all denied
+</FilesMatch>

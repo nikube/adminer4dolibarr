@@ -1,0 +1,68 @@
+# Fichier de traduction pour le module Adminer4Dolibarr
+
+#
+# Générique
+#
+
+# Libellé du module 'ModuleAdminer4DolibarrName'
+ModuleAdminer4DolibarrName = Gestionnaire de Base de Données Adminer
+# Description du module 'ModuleAdminer4DolibarrDesc'
+ModuleAdminer4DolibarrDesc = Intègre l'outil de gestion de base de données Adminer dans Dolibarr avec authentification automatique
+
+#
+# Page d'administration
+#
+Adminer4DolibarrSetup = Configuration du Gestionnaire de Base de Données Adminer
+Settings = Paramètres
+Adminer4DolibarrSetupPage = Page de configuration du Gestionnaire de Base de Données Adminer
+Adminer4DolibarrArea = Gestionnaire de Base de Données Adminer
+AdminerFileNotFound = Fichier Adminer introuvable
+
+#
+# Page À propos
+#
+About = À propos
+Adminer4DolibarrAbout = À propos du Gestionnaire de Base de Données Adminer
+Adminer4DolibarrAboutPage = À propos du module Adminer4Dolibarr
+
+#
+# Menu
+#
+AdminerDatabaseManager = Gestionnaire de Base de Données (Adminer)
+
+#
+# Paramètres de configuration
+#
+ADMINER4DOLIBARR_ALLOW_NON_ADMIN = Autoriser les utilisateurs non-administrateurs à accéder à Adminer
+Adminer4DolibarrAllowNonAdminHelp = Attention : Activer cette option permet à TOUS les utilisateurs Dolibarr d'accéder à la base de données avec tous les privilèges (voir, modifier, supprimer). N'activez que si vous faites confiance à tous les utilisateurs.
+
+#
+# Messages
+#
+AdminerAccessRestricted = L'accès à Adminer est réservé aux administrateurs uniquement
+AdminerIntegrationInfo = Adminer est automatiquement configuré avec vos identifiants de base de données Dolibarr
+
+#
+# Page À propos - Contenu
+#
+AboutAdminerWhat = Qu'est-ce qu'Adminer ?
+AboutAdminerWhatDesc = Adminer est un outil complet de gestion de bases de données écrit en PHP. Il fournit une interface simple pour gérer MySQL, PostgreSQL, SQLite et d'autres bases de données.
+AboutAdminerIntegration = Intégration
+AboutAdminerIntegratedBy = Intégré pour Dolibarr par
+AboutAdminerFeatures = Fonctionnalités
+AboutAdminerFeature1 = Connexion automatique avec les identifiants de base de données Dolibarr
+AboutAdminerFeature2 = Contrôle d'accès sécurisé (admin uniquement par défaut)
+AboutAdminerFeature3 = Gestion complète de la base de données (tables, requêtes, import/export)
+AboutAdminerFeature4 = Accès non-admin optionnel via configuration
+AboutAdminerLicense = Licence & Crédits
+AboutAdminerOriginal = Adminer Original
+AboutAdminerOriginalAuthor = Auteur : Jakub Vrana
+AboutAdminerOriginalLicense = Licence : Apache License 2.0 / GPL v2
+AboutAdminerOriginalWebsite = Site web
+AboutAdminerIntegrationLicense = Intégration Dolibarr : GPL v3+
+
+#
+# Avis de téléchargement
+#
+Adminer4DolibarrUploadTitle=Importation de fichiers SQL volumineux
+Adminer4DolibarrUploadNotice=Votre serveur web a une limite de taille pour les envois de fichiers (post_max_size). Pour importer un fichier SQL volumineux, téléchargez-le via FTP ou votre gestionnaire de fichiers dans le répertoire suivant : <strong>%s</strong>. Ensuite, dans Adminer, cliquez sur "Importer" et vous verrez un bouton "Depuis le serveur" pour sélectionner et importer le fichier.

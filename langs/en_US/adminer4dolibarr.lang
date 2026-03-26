@@ -1,0 +1,68 @@
+# Translation file for Adminer4Dolibarr module
+
+#
+# Generic
+#
+
+# Module label 'ModuleAdminer4DolibarrName'
+ModuleAdminer4DolibarrName = Adminer Database Manager
+# Module description 'ModuleAdminer4DolibarrDesc'
+ModuleAdminer4DolibarrDesc = Integrate Adminer database management tool into Dolibarr with automatic authentication
+
+#
+# Admin page
+#
+Adminer4DolibarrSetup = Adminer Database Manager Setup
+Settings = Settings
+Adminer4DolibarrSetupPage = Configuration page for Adminer Database Manager
+Adminer4DolibarrArea = Adminer Database Manager
+AdminerFileNotFound = Adminer file not found
+
+#
+# About page
+#
+About = About
+Adminer4DolibarrAbout = About Adminer Database Manager
+Adminer4DolibarrAboutPage = About Adminer4Dolibarr module
+
+#
+# Menu
+#
+AdminerDatabaseManager = Database Manager (Adminer)
+
+#
+# Setup parameters
+#
+ADMINER4DOLIBARR_ALLOW_NON_ADMIN = Allow non-administrator users to access Adminer
+Adminer4DolibarrAllowNonAdminHelp = Warning: Enabling this option allows ALL Dolibarr users to access the database with full privileges (view, modify, delete). Only enable if you trust all users.
+
+#
+# Messages
+#
+AdminerAccessRestricted = Access to Adminer is restricted to administrators only
+AdminerIntegrationInfo = Adminer is automatically configured with your Dolibarr database credentials
+
+#
+# About page content
+#
+AboutAdminerWhat = What is Adminer?
+AboutAdminerWhatDesc = Adminer is a full-featured database management tool written in PHP. It provides a simple interface for managing MySQL, PostgreSQL, SQLite, and other databases.
+AboutAdminerIntegration = Integration
+AboutAdminerIntegratedBy = Integrated for Dolibarr by
+AboutAdminerFeatures = Features
+AboutAdminerFeature1 = Automatic login with Dolibarr database credentials
+AboutAdminerFeature2 = Secure access control (admin-only by default)
+AboutAdminerFeature3 = Complete database management (tables, queries, import/export)
+AboutAdminerFeature4 = Optional non-admin access via configuration
+AboutAdminerLicense = License & Credits
+AboutAdminerOriginal = Original Adminer
+AboutAdminerOriginalAuthor = Author: Jakub Vrana
+AboutAdminerOriginalLicense = License: Apache License 2.0 / GPL v2
+AboutAdminerOriginalWebsite = Website
+AboutAdminerIntegrationLicense = Dolibarr Integration: GPL v3+
+
+#
+# Upload notice
+#
+Adminer4DolibarrUploadTitle=Importing Large SQL Files
+Adminer4DolibarrUploadNotice=Your web server has a size limit for file uploads (post_max_size). To import a large SQL file, upload it via FTP or your file manager to the following directory: <strong>%s</strong>. Then, in Adminer, click on "Import" and you will see a "From server" button to select and import the file.
