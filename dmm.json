@@ -3,7 +3,7 @@
   "module_id": "adminer4dolibarr",
   "name": "Adminer for Dolibarr",
   "description": "Integrate Adminer database management tool directly into Dolibarr with automatic authentication.",
-  "author": "AnatoleConseil.com",
+  "author": "Nicolas - AnatoleConseil.com",
   "url": "https://anatoleconseil.com/",
   "license": "GPL-3.0",
   "dolibarr_module_id": 185150,

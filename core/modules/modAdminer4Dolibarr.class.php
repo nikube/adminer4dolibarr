@@ -71,7 +71,9 @@ class modAdminer4Dolibarr extends DolibarrModules
 		$this->descriptionlong = "Adminer4DolibarrDescription";
 
 		// Author
-		$this->editor_name = 'AnatoleConseil.com';
+		$this->editor_name = 'Nicolas - AnatoleConseil.com';
+		$this->editor_url = 'https://anatoleconseil.com/';
+		$this->editor_email = 'nz@anatoleconseil.com';
 		$this->editor_url = 'https://anatoleconseil.com/';		// Must be an external online web site
 		$this->editor_squarred_logo = '';					// Must be image filename into the module/img directory followed with @modulename. Example: 'myimage.png@adminer4dolibarr'
 
