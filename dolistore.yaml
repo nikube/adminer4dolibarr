@@ -1,0 +1,104 @@
+product_id: 2545
+
+name: Adminer4Dolibarr
+slug: adminer4dolibarr
+module_dir: adminer4dolibarr
+
+doli_min: V16
+doli_max: V23
+php_min: "7.1"
+
+price: "0"
+contact: nz@anatoleconseil.com
+categories: [outils-systemes]
+keywords: "adminer, database, sql, dbadmin, mysql, mariadb, phpmyadmin, dolibarr"
+validity_days: 730
+
+descriptions:
+  en:
+    short: >-
+      Integrate the Adminer database manager directly into Dolibarr, with
+      automatic login using your Dolibarr database credentials. Admin-only by
+      default.
+    long: |
+      <h2>Adminer for Dolibarr</h2>
+      <p>Manage your Dolibarr database from inside Dolibarr itself. This module
+      embeds <a href="https://www.adminer.org/">Adminer</a>, the well-known
+      single-file database manager, and logs you in automatically using your
+      Dolibarr database credentials &mdash; no separate password to type, no
+      extra tool to deploy.</p>
+
+      <h3>Key features</h3>
+      <ul>
+        <li><b>Automatic login</b> &mdash; connects to your Dolibarr database with the credentials from <code>conf.php</code>, no manual entry.</li>
+        <li><b>Admin-only by default</b> &mdash; access is restricted to Dolibarr administrators. A clearly-labelled option can grant full SQL access to non-admin users (use with care).</li>
+        <li><b>Full database management</b> &mdash; browse tables, run SQL queries, edit rows, import and export data.</li>
+        <li><b>Bundled Adminer 5.4.2</b> &mdash; ships with a recent Adminer release; nothing else to download.</li>
+        <li><b>Large SQL imports</b> &mdash; helper notice for importing large dumps placed on the server.</li>
+      </ul>
+
+      <h3>What's new in 0.4</h3>
+      <ul>
+        <li><b>Fixed</b> the browser redirect loop / blank page where Adminer's static assets failed to load (<code>NS_BINDING_ABORTED</code>).</li>
+        <li><b>Security</b>: the non-admin option is renamed to make explicit that it grants full read/write/DROP access to the whole database, with a DANGER warning.</li>
+        <li>Database driver is now matched to your Dolibarr DB type (MySQL/MariaDB, PostgreSQL, SQLite).</li>
+        <li>Various PHP-warning fixes and internal cleanup.</li>
+      </ul>
+
+      <h3>Security note</h3>
+      <p>Adminer connects with your full Dolibarr database account. Keep access
+      restricted to administrators unless you explicitly trust every user you
+      grant access to.</p>
+
+      <h3>Requirements</h3>
+      <ul>
+        <li>Dolibarr 16.0 or higher (tested on V23)</li>
+        <li>PHP 7.1 or higher</li>
+      </ul>
+
+      <h3>License</h3>
+      <p>GPL v3 or later. Adminer itself is distributed under Apache License 2.0 / GPL v2.</p>
+
+  fr:
+    short: >-
+      Intégrez le gestionnaire de base de données Adminer directement dans
+      Dolibarr, avec connexion automatique via les identifiants de votre base
+      Dolibarr. Réservé aux administrateurs par défaut.
+    long: |
+      <h2>Adminer pour Dolibarr</h2>
+      <p>Gérez votre base de données Dolibarr depuis Dolibarr lui-même. Ce module
+      intègre <a href="https://www.adminer.org/">Adminer</a>, le célèbre
+      gestionnaire de base de données mono-fichier, et vous connecte
+      automatiquement avec les identifiants de votre base Dolibarr &mdash; aucun
+      mot de passe à ressaisir, aucun outil supplémentaire à déployer.</p>
+
+      <h3>Fonctionnalités principales</h3>
+      <ul>
+        <li><b>Connexion automatique</b> &mdash; se connecte à votre base Dolibarr avec les identifiants de <code>conf.php</code>, sans saisie manuelle.</li>
+        <li><b>Réservé aux admins par défaut</b> &mdash; l'accès est limité aux administrateurs Dolibarr. Une option clairement signalée permet d'accorder un accès SQL complet aux utilisateurs non-admins (à utiliser avec prudence).</li>
+        <li><b>Gestion complète de la base</b> &mdash; parcourir les tables, exécuter des requêtes SQL, éditer des lignes, importer et exporter des données.</li>
+        <li><b>Adminer 5.4.2 inclus</b> &mdash; livré avec une version récente d'Adminer ; rien d'autre à télécharger.</li>
+        <li><b>Imports SQL volumineux</b> &mdash; aide à l'import de gros dumps déposés sur le serveur.</li>
+      </ul>
+
+      <h3>Nouveautés de la 0.4</h3>
+      <ul>
+        <li><b>Correction</b> de la boucle de redirection / page blanche dans le navigateur où les fichiers statiques d'Adminer ne se chargeaient pas (<code>NS_BINDING_ABORTED</code>).</li>
+        <li><b>Sécurité</b> : l'option d'accès non-admin est renommée pour indiquer clairement qu'elle accorde un accès complet en lecture/écriture/suppression à toute la base, avec un avertissement DANGER.</li>
+        <li>Le pilote de base est désormais adapté au type de base Dolibarr (MySQL/MariaDB, PostgreSQL, SQLite).</li>
+        <li>Diverses corrections d'avertissements PHP et nettoyage interne.</li>
+      </ul>
+
+      <h3>Note de sécurité</h3>
+      <p>Adminer se connecte avec le compte de base de données complet de
+      Dolibarr. Gardez l'accès réservé aux administrateurs, sauf si vous faites
+      entièrement confiance à chaque utilisateur autorisé.</p>
+
+      <h3>Prérequis</h3>
+      <ul>
+        <li>Dolibarr 16.0 ou supérieur (testé sur V23)</li>
+        <li>PHP 7.1 ou supérieur</li>
+      </ul>
+
+      <h3>Licence</h3>
+      <p>GPL v3 ou supérieure. Adminer est distribué sous licence Apache 2.0 / GPL v2.</p>
