@@ -21,6 +21,15 @@
  *	\brief      Adminer Database Manager for Dolibarr - Secure wrapper with auto-login
  */
 
+// Adminer serves its own static assets through ?file=... and exits immediately.
+// Serve these before loading Dolibarr to avoid session locks and bootstrap overhead
+// on parallel browser requests.
+$adminer_asset_files = array('default.css', 'dark.css', 'functions.js', 'jush.js', 'logo.png');
+if (isset($_GET['file']) && in_array($_GET['file'], $adminer_asset_files, true)) {
+	include __DIR__ . '/adminer-5.4.2.php';
+	exit;
+}
+
 // Start output buffering to isolate Adminer's output from Dolibarr
 ob_start();
 
@@ -94,24 +103,24 @@ if (!$res) {
 // Adminer has its own translation system, we don't need Dolibarr translations
 
 // Security check - Check if user has permission
-// Either user is admin OR non-admin access is enabled via configuration
-if (empty($user->admin) && !getDolGlobalInt('ADMINER4DOLIBARR_ALLOW_NON_ADMIN')) {
-	accessforbidden('Administrator access required (or enable non-admin access in module configuration)');
+// Either user is admin OR full SQL access has been explicitly granted to non-admin
+// users via configuration. WARNING: that option gives DROP/UPDATE on the whole base.
+if (empty($user->admin) && !getDolGlobalInt('ADMINER4DOLIBARR_GRANT_FULL_SQL_ACCESS_TO_NON_ADMIN')) {
+	accessforbidden('Administrator access required (or grant full SQL access to non-admin users in module configuration)');
 }
 
 if (!isModEnabled('adminer4dolibarr')) {
 	accessforbidden('Module not enabled');
 }
 
-// Fix session path for Adminer's CSRF protection
-// Adminer needs a writable session path to store CSRF tokens
-$session_path = DOL_DATA_ROOT . '/adminer4dolibarr/sessions';
-if (!is_dir($session_path)) {
-	@mkdir($session_path, 0700, true);
-}
-if (is_dir($session_path) && is_writable($session_path)) {
-	@ini_set('session.save_path', $session_path);
-}
+// NOTE on sessions: Adminer reuses Dolibarr's already-started PHP session to store
+// its own CSRF token and connection state under $_SESSION. We intentionally do NOT
+// start a separate session here: main.inc.php has already called session_start(), so
+// switching session.save_path / session.name at this point would create a brand new
+// empty session on every request. That breaks Adminer's CSRF handshake (the token
+// shown in the login form never matches the one validated on submit), producing an
+// infinite "Invalid CSRF token" redirect loop. Sharing Dolibarr's session is safe
+// here because access is already restricted to admins (or explicitly granted users).
 
 // Aggressively clean up ALL Dolibarr-specific GET/POST/SESSION parameters
 // This is the key fix for max_input_vars errors: Dolibarr injects many hidden
@@ -135,17 +144,33 @@ if (!is_numeric($zd)) {
 	$_SESSION["token"] = rand(1, 1e6);
 }
 
-// Trigger auto-login ONLY on first access (when not yet logged in to Adminer)
-$_GET["username"] = "";
-if ($_SESSION["db"]["server"][""][""][""] != true) {
-	// Not logged in yet - trigger auto-login
-	$_POST["auth"] = array(
-		"driver" => "server",
-		"server" => "",
-		"username" => "",
-		"password" => "",
-		"db" => ""
-	);
+// Map the Dolibarr database type to the matching Adminer driver.
+// Adminer uses "server" as the driver key for MySQL/MariaDB, "pgsql" for PostgreSQL, etc.
+$adminer_driver = 'server';
+switch ($dolibarr_main_db_type) {
+	case 'mysql':
+	case 'mysqli':
+		$adminer_driver = 'server';
+		break;
+	case 'pgsql':
+		$adminer_driver = 'pgsql';
+		break;
+	case 'sqlite3':
+		$adminer_driver = 'sqlite';
+		break;
+}
+
+// Seed Adminer's login state directly instead of posting auth credentials to Adminer.
+// Adminer calls session_regenerate_id() whenever $_POST["auth"] is present. In a real
+// browser, the main page and the ?file= asset requests are concurrent, so that
+// regeneration can race with asset loading and cause redirect loops/aborted assets.
+// The session keys below match Adminer's own set_password()/login marker layout.
+$is_asset_request = isset($_GET['file']); // Adminer serves its own css/js/img via ?file=
+if (!$is_asset_request && empty($_POST['logout'])) {
+	$_GET[$adminer_driver] = isset($_GET[$adminer_driver]) ? $_GET[$adminer_driver] : "";
+	$_GET["username"] = "";
+	$_SESSION["pwds"][$adminer_driver][""][""] = "";
+	$_SESSION["db"][$adminer_driver][""][""][""] = true;
 }
 
 
@@ -249,13 +274,23 @@ function adminer_object()
 // print $langs->trans('Adminer4DolibarrUploadNotice', DOL_DATA_ROOT . '/adminer4dolibarr/temp');
 // print '</div><br>';
 
+// Adminer ends its rendering with exit()/die() in most code paths, so any cleanup
+// placed AFTER the include below would never run. Register it as a shutdown function
+// to flush the output buffer in all cases.
+//
+// We deliberately do NOT close $db here: Adminer connects with the same MySQL
+// credentials and closes the underlying mysqli link itself at the end of its run.
+// Calling DoliDBMysqli->close() afterwards throws "mysqli object is already closed".
+// PHP closes the connection on shutdown anyway, so there is nothing left to do.
+register_shutdown_function(function () {
+	while (ob_get_level() > 0) {
+		@ob_end_flush();
+	}
+});
+
 // Include Adminer directly (based on dbadmin module pattern)
 // No need to inject Dolibarr CSRF tokens since:
 // 1. We disabled Dolibarr's CSRF check with NOCSRFCHECK
 // 2. Adminer has its own CSRF protection
 // 3. Injecting extra tokens can exceed max_input_vars and break Adminer's forms
 include $adminer_file;
-
-// Flush output buffer and close database connection
-ob_end_flush();
-$db->close();

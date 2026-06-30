@@ -33,8 +33,8 @@ AdminerDatabaseManager = Database Manager (Adminer)
 #
 # Setup parameters
 #
-ADMINER4DOLIBARR_ALLOW_NON_ADMIN = Allow non-administrator users to access Adminer
-Adminer4DolibarrAllowNonAdminHelp = Warning: Enabling this option allows ALL Dolibarr users to access the database with full privileges (view, modify, delete). Only enable if you trust all users.
+ADMINER4DOLIBARR_GRANT_FULL_SQL_ACCESS_TO_NON_ADMIN = Grant FULL SQL ACCESS (read/write/delete) to non-administrator users
+Adminer4DolibarrGrantFullSqlAccessHelp = DANGER: This option logs non-administrator users into Adminer using Dolibarr's full database credentials. They will be able to read, modify, truncate and DROP any table of the WHOLE database, with no Dolibarr permission restrictions whatsoever. Only enable this on a test environment or if you fully trust ALL users.
 
 #
 # Messages

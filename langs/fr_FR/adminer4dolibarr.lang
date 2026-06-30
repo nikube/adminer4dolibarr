@@ -33,8 +33,8 @@ AdminerDatabaseManager = Gestionnaire de Base de Données (Adminer)
 #
 # Paramètres de configuration
 #
-ADMINER4DOLIBARR_ALLOW_NON_ADMIN = Autoriser les utilisateurs non-administrateurs à accéder à Adminer
-Adminer4DolibarrAllowNonAdminHelp = Attention : Activer cette option permet à TOUS les utilisateurs Dolibarr d'accéder à la base de données avec tous les privilèges (voir, modifier, supprimer). N'activez que si vous faites confiance à tous les utilisateurs.
+ADMINER4DOLIBARR_GRANT_FULL_SQL_ACCESS_TO_NON_ADMIN = Accorder un ACCÈS SQL COMPLET (lecture/écriture/suppression) aux utilisateurs non-administrateurs
+Adminer4DolibarrGrantFullSqlAccessHelp = DANGER : Cette option connecte les utilisateurs non-administrateurs à Adminer avec les identifiants de base de données complets de Dolibarr. Ils pourront lire, modifier, vider et SUPPRIMER (DROP) n'importe quelle table de TOUTE la base, sans aucune restriction de droits Dolibarr. N'activez ceci que sur un environnement de test ou si vous accordez une confiance absolue à TOUS les utilisateurs.
 
 #
 # Messages

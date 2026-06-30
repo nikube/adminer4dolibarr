@@ -72,13 +72,12 @@ class modAdminer4Dolibarr extends DolibarrModules
 
 		// Author
 		$this->editor_name = 'Nicolas - AnatoleConseil.com';
-		$this->editor_url = 'https://anatoleconseil.com/';
 		$this->editor_email = 'nz@anatoleconseil.com';
 		$this->editor_url = 'https://anatoleconseil.com/';		// Must be an external online web site
 		$this->editor_squarred_logo = '';					// Must be image filename into the module/img directory followed with @modulename. Example: 'myimage.png@adminer4dolibarr'
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '0.3';
+		$this->version = '0.4';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -89,7 +88,7 @@ class modAdminer4Dolibarr extends DolibarrModules
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
 		// If file is in module/img directory under name object_pictovalue.png, use this->picto='pictovalue@module'
 		// To use a supported fa-xxx css style of font awesome, use this->picto='xxx'
-		$this->picto = 'invoicing';
+		$this->picto = 'technic';
 
 		// Define some features supported by module (triggers, login, substitutions, menus, css, etc...)
 		$this->module_parts = array(
@@ -318,7 +317,7 @@ class modAdminer4Dolibarr extends DolibarrModules
 			'langs' => 'adminer4dolibarr@adminer4dolibarr',
 			'position' => 100,
 			'enabled' => 'isModEnabled("adminer4dolibarr")',
-			'perms' => '$user->admin || getDolGlobalInt("ADMINER4DOLIBARR_ALLOW_NON_ADMIN")',
+			'perms' => '$user->admin || getDolGlobalInt("ADMINER4DOLIBARR_GRANT_FULL_SQL_ACCESS_TO_NON_ADMIN")',
 			'target' => '',
 			'user' => 2,
 		);
@@ -454,8 +453,6 @@ class modAdminer4Dolibarr extends DolibarrModules
 	 */
 	public function init($options = '')
 	{
-		global $conf, $langs;
-
 		// Create tables of module at module activation
 		//$result = $this->_load_tables('/install/mysql/', 'adminer4dolibarr');
 		$result = $this->_load_tables('/adminer4dolibarr/sql/');
@@ -473,41 +470,12 @@ class modAdminer4Dolibarr extends DolibarrModules
 		//$result4=$extrafields->addExtraField('adminer4dolibarr_myattr4', "New Attr 4 label", 'select',  1,  3, 'thirdparty',   0, 1, '', array('options'=>array('code1'=>'Val1','code2'=>'Val2','code3'=>'Val3')), 1,'', -1, 0, '', '', 'adminer4dolibarr@adminer4dolibarr', 'isModEnabled("adminer4dolibarr")');
 		//$result5=$extrafields->addExtraField('adminer4dolibarr_myattr5', "New Attr 5 label", 'text',    1, 10, 'user',         0, 0, '', '', 1, '', -1, 0, '', '', 'adminer4dolibarr@adminer4dolibarr', 'isModEnabled("adminer4dolibarr")');
 
-		// Permissions
+		// Clean previous menus/permissions before re-adding them
 		$this->remove($options);
 
+		// This module provides no business object (no numbering models, no document
+		// templates), so there is nothing extra to insert at activation.
 		$sql = array();
-
-		// Document templates
-		$moduledir = dol_sanitizeFileName('adminer4dolibarr');
-		$myTmpObjects = array();
-		$myTmpObjects['MyObject'] = array('includerefgeneration' => 0, 'includedocgeneration' => 0);
-
-		foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
-			if ($myTmpObjectArray['includerefgeneration']) {
-				$src = DOL_DOCUMENT_ROOT.'/install/doctemplates/'.$moduledir.'/template_myobjects.odt';
-				$dirodt = DOL_DATA_ROOT.($conf->entity > 1 ? '/'.$conf->entity : '').'/doctemplates/'.$moduledir;
-				$dest = $dirodt.'/template_myobjects.odt';
-
-				if (file_exists($src) && !file_exists($dest)) {
-					require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
-					dol_mkdir($dirodt);
-					$result = dol_copy($src, $dest, '0', 0);
-					if ($result < 0) {
-						$langs->load("errors");
-						$this->error = $langs->trans('ErrorFailToCopyFile', $src, $dest);
-						return 0;
-					}
-				}
-
-				$sql = array_merge($sql, array(
-					"DELETE FROM ".$this->db->prefix()."document_model WHERE nom = 'standard_".strtolower($myTmpObjectKey)."' AND type = '".$this->db->escape(strtolower($myTmpObjectKey))."' AND entity = ".((int) $conf->entity),
-					"INSERT INTO ".$this->db->prefix()."document_model (nom, type, entity) VALUES('standard_".strtolower($myTmpObjectKey)."', '".$this->db->escape(strtolower($myTmpObjectKey))."', ".((int) $conf->entity).")",
-					"DELETE FROM ".$this->db->prefix()."document_model WHERE nom = 'generic_".strtolower($myTmpObjectKey)."_odt' AND type = '".$this->db->escape(strtolower($myTmpObjectKey))."' AND entity = ".((int) $conf->entity),
-					"INSERT INTO ".$this->db->prefix()."document_model (nom, type, entity) VALUES('generic_".strtolower($myTmpObjectKey)."_odt', '".$this->db->escape(strtolower($myTmpObjectKey))."', ".((int) $conf->entity).")"
-				));
-			}
-		}
 
 		return $this->_init($sql, $options);
 	}
