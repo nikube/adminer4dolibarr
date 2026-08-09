@@ -2,7 +2,7 @@ product_id: 2545
 
 name: Adminer4Dolibarr
 slug: adminer4dolibarr
-module_dir: adminer4dolibarr
+module_dir: "."
 
 doli_min: V16
 doli_max: V23
