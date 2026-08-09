@@ -1,5 +1,10 @@
 # CHANGELOG MODULE ADMINER4DOLIBARR FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## 0.5
+
+- Upgraded bundled Adminer from 5.4.2 to 6.0.0 (major Adminer release). The wrapper integration points (plugin system, auto-login session seeding, `?file=` asset serving, driver mapping) are unchanged in Adminer 6.
+- Note: Adminer 6 additionally checks the `Sec-Fetch-Site` header on form submissions (must be same-origin), an extra CSRF hardening transparent for normal browser use.
+
 ## 0.4
 
 - SECURITY: renamed the non-admin option `ADMINER4DOLIBARR_ALLOW_NON_ADMIN` to `ADMINER4DOLIBARR_GRANT_FULL_SQL_ACCESS_TO_NON_ADMIN` with an explicit DANGER warning, to make clear it grants full read/write/DROP access to the whole database. **Breaking:** re-enable the option after upgrade if you relied on it.

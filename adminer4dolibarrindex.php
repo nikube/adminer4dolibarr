@@ -26,7 +26,7 @@
 // on parallel browser requests.
 $adminer_asset_files = array('default.css', 'dark.css', 'functions.js', 'jush.js', 'logo.png');
 if (isset($_GET['file']) && in_array($_GET['file'], $adminer_asset_files, true)) {
-	include __DIR__ . '/adminer-5.4.2.php';
+	include __DIR__ . '/adminer-6.0.0.php';
 	exit;
 }
 
@@ -179,10 +179,10 @@ if (!$is_asset_request && empty($_POST['logout'])) {
  */
 
 // Check if adminer file exists
-$adminer_file = __DIR__ . '/adminer-5.4.2.php';
+$adminer_file = __DIR__ . '/adminer-6.0.0.php';
 if (!file_exists($adminer_file)) {
 	// Simple error message (can't use llxHeader/llxFooter due to NOREQUIREHTML)
-	die('<html><body><h1>Error</h1><p>Adminer file not found: adminer-5.4.2.php</p><p>Please download Adminer 5.4.2 and place it in the module directory.</p></body></html>');
+	die('<html><body><h1>Error</h1><p>Adminer file not found: adminer-6.0.0.php</p><p>Please download Adminer 6.0.0 and place it in the module directory.</p></body></html>');
 }
 
 // Store Dolibarr credentials in global scope so they're accessible in adminer_object()
@@ -198,7 +198,7 @@ $GLOBALS['dolibarr_db_config'] = array(
 /**
  * Adminer plugin loader function
  *
- * IMPORTANT: This function must be defined BEFORE including adminer-5.4.2.php
+ * IMPORTANT: This function must be defined BEFORE including adminer-6.0.0.php
  * Adminer will call this function after loading its base classes, allowing us
  * to return a customized Adminer instance with auto-login functionality.
  *
