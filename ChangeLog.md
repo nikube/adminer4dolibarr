@@ -1,5 +1,9 @@
 # CHANGELOG MODULE ADMINER4DOLIBARR FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## 0.6
+
+- Upgraded bundled Adminer from 6.0.0 to 6.0.2 (bug-fix releases). No wrapper change needed.
+
 ## 0.5
 
 - Upgraded bundled Adminer from 5.4.2 to 6.0.0 (major Adminer release). The wrapper integration points (plugin system, auto-login session seeding, `?file=` asset serving, driver mapping) are unchanged in Adminer 6.

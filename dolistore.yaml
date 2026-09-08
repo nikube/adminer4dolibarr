@@ -33,7 +33,7 @@ descriptions:
         <li><b>Automatic login</b> &mdash; connects to your Dolibarr database with the credentials from <code>conf.php</code>, no manual entry.</li>
         <li><b>Admin-only by default</b> &mdash; access is restricted to Dolibarr administrators. A clearly-labelled option can grant full SQL access to non-admin users (use with care).</li>
         <li><b>Full database management</b> &mdash; browse tables, run SQL queries, edit rows, import and export data.</li>
-        <li><b>Bundled Adminer 6.0.0</b> &mdash; ships with a recent Adminer release; nothing else to download.</li>
+        <li><b>Bundled Adminer 6.0.2</b> &mdash; ships with a recent Adminer release; nothing else to download.</li>
         <li><b>Large SQL imports</b> &mdash; helper notice for importing large dumps placed on the server.</li>
       </ul>
 
@@ -77,7 +77,7 @@ descriptions:
         <li><b>Connexion automatique</b> &mdash; se connecte à votre base Dolibarr avec les identifiants de <code>conf.php</code>, sans saisie manuelle.</li>
         <li><b>Réservé aux admins par défaut</b> &mdash; l'accès est limité aux administrateurs Dolibarr. Une option clairement signalée permet d'accorder un accès SQL complet aux utilisateurs non-admins (à utiliser avec prudence).</li>
         <li><b>Gestion complète de la base</b> &mdash; parcourir les tables, exécuter des requêtes SQL, éditer des lignes, importer et exporter des données.</li>
-        <li><b>Adminer 6.0.0 inclus</b> &mdash; livré avec une version récente d'Adminer ; rien d'autre à télécharger.</li>
+        <li><b>Adminer 6.0.2 inclus</b> &mdash; livré avec une version récente d'Adminer ; rien d'autre à télécharger.</li>
         <li><b>Imports SQL volumineux</b> &mdash; aide à l'import de gros dumps déposés sur le serveur.</li>
       </ul>
 

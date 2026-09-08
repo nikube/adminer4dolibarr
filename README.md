@@ -31,7 +31,7 @@ Adminer (formerly phpMinAdmin) is a full-featured database management tool writt
 3. Upload the ZIP file
 4. Click "Deploy"
 
-The module includes Adminer 6.0.0 - no additional downloads required!
+The module includes Adminer 6.0.2 - no additional downloads required!
 
 #### From source
 
@@ -67,10 +67,10 @@ The database connection is **automatically configured** with your Dolibarr crede
 
 ## Updating Adminer
 
-This module includes Adminer 6.0.0. To update to a newer version of Adminer:
+This module includes Adminer 6.0.2. To update to a newer version of Adminer:
 
 1. Download the latest version from [adminer.org](https://www.adminer.org/)
-2. Replace the existing `adminer-6.0.0.php` file in `/custom/adminer4dolibarr/`
+2. Replace the existing `adminer-6.0.2.php` file in `/custom/adminer4dolibarr/`
 3. Update the filename reference in `adminer4dolibarrindex.php` if the version number changed
 
 ## Troubleshooting
@@ -113,7 +113,7 @@ Adminer is licensed under Apache License 2.0 or GPL 2. See [Adminer's license](h
 - **Author:** Jakub Vrána
 - **Website:** [https://www.adminer.org/](https://www.adminer.org/)
 - **License:** Apache License 2.0 / GPL v2
-- **Version included:** 6.0.0
+- **Version included:** 6.0.2
 
 ### Dolibarr Integration
 - **Developed by:** Anatole Conseil (nz@anatoleconseil.com)
@@ -121,6 +121,9 @@ Adminer is licensed under Apache License 2.0 or GPL 2. See [Adminer's license](h
 - **Built with:** [Dolibarr Module Builder](https://wiki.dolibarr.org/index.php/Module_builder)
 
 ## Changelog
+
+### Version 0.6
+- Upgraded bundled Adminer from 6.0.0 to 6.0.2
 
 ### Version 0.5
 - Upgraded bundled Adminer from 5.4.2 to 6.0.0
