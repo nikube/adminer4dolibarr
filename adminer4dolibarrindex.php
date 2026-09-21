@@ -26,7 +26,7 @@
 // on parallel browser requests.
 $adminer_asset_files = array('default.css', 'dark.css', 'functions.js', 'jush.js', 'logo.png');
 if (isset($_GET['file']) && in_array($_GET['file'], $adminer_asset_files, true)) {
-	include __DIR__ . '/adminer-6.0.2.php';
+	include __DIR__ . '/adminer-6.1.0.php';
 	exit;
 }
 
@@ -137,12 +137,15 @@ foreach ($dolibarr_params as $param) {
 	unset($_POST[$param]);
 }
 
-// Create the Adminer session token to avoid PHP warnings
-// Based on working dbadmin module pattern
-$zd = isset($_SESSION["token"]) ? $_SESSION["token"] : null;
-if (!is_numeric($zd)) {
-	$_SESSION["token"] = rand(1, 1e6);
+// Adminer and Dolibarr both store their CSRF secret in $_SESSION["token"]. Any Dolibarr
+// page opened meanwhile (other tab, back to the ERP...) overwrites it with its own hex
+// token, which invalidated every Adminer form already displayed ("Invalid CSRF token").
+// Keep Adminer's secret under our own key and put it back in place on each request.
+// Harmless for Dolibarr: it copies $_SESSION['newtoken'] over 'token' before checking it.
+if (empty($_SESSION['adminer4dolibarr_token'])) {
+	$_SESSION['adminer4dolibarr_token'] = random_int(1, 1000000);
 }
+$_SESSION["token"] = $_SESSION['adminer4dolibarr_token'];
 
 // Map the Dolibarr database type to the matching Adminer driver.
 // Adminer uses "server" as the driver key for MySQL/MariaDB, "pgsql" for PostgreSQL, etc.
@@ -171,6 +174,11 @@ if (!$is_asset_request && empty($_POST['logout'])) {
 	$_GET["username"] = "";
 	$_SESSION["pwds"][$adminer_driver][""][""] = "";
 	$_SESSION["db"][$adminer_driver][""][""][""] = true;
+	// Landing page (no query string): open the Dolibarr database directly instead of
+	// Adminer's "Select database" screen. Server-level pages stay reachable from the UI.
+	if (empty($_SERVER['QUERY_STRING'])) {
+		$_GET['db'] = $dolibarr_main_db_name;
+	}
 }
 
 
@@ -179,10 +187,10 @@ if (!$is_asset_request && empty($_POST['logout'])) {
  */
 
 // Check if adminer file exists
-$adminer_file = __DIR__ . '/adminer-6.0.2.php';
+$adminer_file = __DIR__ . '/adminer-6.1.0.php';
 if (!file_exists($adminer_file)) {
 	// Simple error message (can't use llxHeader/llxFooter due to NOREQUIREHTML)
-	die('<html><body><h1>Error</h1><p>Adminer file not found: adminer-6.0.2.php</p><p>Please download Adminer 6.0.2 and place it in the module directory.</p></body></html>');
+	die('<html><body><h1>Error</h1><p>Adminer file not found: adminer-6.1.0.php</p><p>Please download Adminer 6.1.0 and place it in the module directory.</p></body></html>');
 }
 
 // Store Dolibarr credentials in global scope so they're accessible in adminer_object()
@@ -198,7 +206,7 @@ $GLOBALS['dolibarr_db_config'] = array(
 /**
  * Adminer plugin loader function
  *
- * IMPORTANT: This function must be defined BEFORE including adminer-6.0.2.php
+ * IMPORTANT: This function must be defined BEFORE including adminer-6.1.0.php
  * Adminer will call this function after loading its base classes, allowing us
  * to return a customized Adminer instance with auto-login functionality.
  *
