@@ -5,7 +5,7 @@ slug: adminer4dolibarr
 module_dir: "."
 
 doli_min: V16
-doli_max: V23
+doli_max: V24
 php_min: "7.1"
 
 price: "0"
@@ -37,12 +37,11 @@ descriptions:
         <li><b>Large SQL imports</b> &mdash; helper notice for importing large dumps placed on the server.</li>
       </ul>
 
-      <h3>What's new in 0.4</h3>
+      <h3>What's new in 0.7</h3>
       <ul>
-        <li><b>Fixed</b> the browser redirect loop / blank page where Adminer's static assets failed to load (<code>NS_BINDING_ABORTED</code>).</li>
-        <li><b>Security</b>: the non-admin option is renamed to make explicit that it grants full read/write/DROP access to the whole database, with a DANGER warning.</li>
-        <li>Database driver is now matched to your Dolibarr DB type (MySQL/MariaDB, PostgreSQL, SQLite).</li>
-        <li>Various PHP-warning fixes and internal cleanup.</li>
+        <li><b>Fixed</b> the "Invalid CSRF token" error that came back after opening any other Dolibarr page: Adminer's CSRF secret now lives under its own session key.</li>
+        <li>Adminer opens directly on the Dolibarr database instead of the "Select database" screen.</li>
+        <li>Bundled Adminer upgraded to 6.1.0.</li>
       </ul>
 
       <h3>Security note</h3>
@@ -52,7 +51,7 @@ descriptions:
 
       <h3>Requirements</h3>
       <ul>
-        <li>Dolibarr 16.0 or higher (tested on V23)</li>
+        <li>Dolibarr 16.0 or higher (tested on V24)</li>
         <li>PHP 7.1 or higher</li>
       </ul>
 
@@ -81,12 +80,11 @@ descriptions:
         <li><b>Imports SQL volumineux</b> &mdash; aide à l'import de gros dumps déposés sur le serveur.</li>
       </ul>
 
-      <h3>Nouveautés de la 0.4</h3>
+      <h3>Nouveautés de la 0.7</h3>
       <ul>
-        <li><b>Correction</b> de la boucle de redirection / page blanche dans le navigateur où les fichiers statiques d'Adminer ne se chargeaient pas (<code>NS_BINDING_ABORTED</code>).</li>
-        <li><b>Sécurité</b> : l'option d'accès non-admin est renommée pour indiquer clairement qu'elle accorde un accès complet en lecture/écriture/suppression à toute la base, avec un avertissement DANGER.</li>
-        <li>Le pilote de base est désormais adapté au type de base Dolibarr (MySQL/MariaDB, PostgreSQL, SQLite).</li>
-        <li>Diverses corrections d'avertissements PHP et nettoyage interne.</li>
+        <li><b>Correction</b> de l'erreur « Invalid CSRF token » qui revenait dès qu'une autre page Dolibarr était ouverte : le secret CSRF d'Adminer est désormais stocké sous sa propre clé de session.</li>
+        <li>Adminer s'ouvre directement sur la base Dolibarr au lieu de l'écran « Sélectionner la base ».</li>
+        <li>Adminer embarqué mis à jour en 6.1.0.</li>
       </ul>
 
       <h3>Note de sécurité</h3>
@@ -96,7 +94,7 @@ descriptions:
 
       <h3>Prérequis</h3>
       <ul>
-        <li>Dolibarr 16.0 ou supérieur (testé sur V23)</li>
+        <li>Dolibarr 16.0 ou supérieur (testé sur V24)</li>
         <li>PHP 7.1 ou supérieur</li>
       </ul>
 
