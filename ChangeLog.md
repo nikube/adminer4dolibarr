@@ -1,5 +1,9 @@
 # CHANGELOG MODULE ADMINER4DOLIBARR FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## 0.8
+
+- Upgraded bundled Adminer from 6.1.0 to 6.1.1 (bug-fix release, incl. SQLite hardening GHSA-r9r5-j5q8-8c59). No wrapper change needed.
+
 ## 0.7
 
 - FIXED "Invalid CSRF token" coming back very quickly: Adminer and Dolibarr both use `$_SESSION["token"]`. Any Dolibarr page opened meanwhile overwrote Adminer's secret, and the wrapper then drew a new random one, invalidating every Adminer form already displayed. Adminer's secret is now kept under a dedicated session key and restored on each request.
