@@ -1,5 +1,10 @@
 # CHANGELOG MODULE ADMINER4DOLIBARR FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## 0.9
+
+- FIXED "Invalid CSRF token" on the second submit from any page produced by a POST (Execute SQL twice, save a row then edit again...). Adminer re-opens the session after it has started streaming the page (SQL history); with Dolibarr's default session cache limiter PHP refused, wiped `$_SESSION`, and the forms of that page were rendered with an empty CSRF secret. The wrapper now sets `session.cache_limiter` to empty before Dolibarr starts the session, as standalone Adminer does.
+- Upgraded bundled Adminer from 6.1.1 to 6.2.0 (SQL textarea keeps indentation, first error line marked, PostgreSQL/SQLite/MS SQL fixes). No wrapper change needed.
+
 ## 0.8
 
 - Upgraded bundled Adminer from 6.1.0 to 6.1.1 (bug-fix release, incl. SQLite hardening GHSA-r9r5-j5q8-8c59). No wrapper change needed.
