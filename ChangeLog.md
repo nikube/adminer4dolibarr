@@ -1,5 +1,11 @@
 # CHANGELOG MODULE ADMINER4DOLIBARR FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## 1.0
+
+- Upgraded bundled Adminer from 6.2.0 to 6.3.1. Security release: SQL injection through geometry column names (MySQL/MariaDB), HTML injection in the select page (GHSA-qjv8-pw8g-jw65, FULLTEXT index names), SQLite `file:` URIs (GHSA-5xfm-7vgj-3f39), passwords of created/altered users no longer stored in the SQL history. Also: search tables, schemas, privileges, variables... with Ctrl+K, HTTP 303 after POST, Adminer now requires PHP 5.4+.
+- Adminer 6.3.1 uses a 128-bit string CSRF secret: the wrapper now keeps a secret of that format (it kept an integer, which Adminer 6.3.1 would regenerate on every request, i.e. "Invalid CSRF token" on every form). Sessions opened with an older module version are migrated transparently.
+- `worker.js` and `logo.svg` are now served by the fast static path (before Dolibarr's bootstrap) like the other Adminer assets; removed the stale `logo.png` entry.
+
 ## 0.9
 
 - FIXED "Invalid CSRF token" on the second submit from any page produced by a POST (Execute SQL twice, save a row then edit again...). Adminer re-opens the session after it has started streaming the page (SQL history); with Dolibarr's default session cache limiter PHP refused, wiped `$_SESSION`, and the forms of that page were rendered with an empty CSRF secret. The wrapper now sets `session.cache_limiter` to empty before Dolibarr starts the session, as standalone Adminer does.
